@@ -111,12 +111,11 @@ export const verificationTokens = createTable(
 export const files = createTable(
   "files",
   {
-    id: varchar("id", { length: 255 }).notNull().primaryKey(),
+    id: integer("id").notNull().primaryKey(),
     name: varchar("name", { length: 255 }).notNull(),
-    type: varchar("type", { length: 255 }).notNull(),
     url: varchar("url", { length: 255 }).notNull(),
-    parent: varchar("parent", { length: 255 }).notNull(),
-    size: varchar("size", { length: 255 }).notNull(),
+    parent: integer("parent").notNull(),
+    size: integer("size").notNull(),
   },
   (file) => ({
     parentIdx: index("files_parent_idx").on(file.parent),
@@ -126,9 +125,9 @@ export const files = createTable(
 export const folders = createTable(
   "folders",
   {
-    id: varchar("id", { length: 255 }).notNull().primaryKey(),
+    id: integer("id").notNull().primaryKey(),
     name: varchar("name", { length: 255 }).notNull(),
-    parent: varchar("parent", { length: 255 }),
+    parent: integer("parent"),
   },
   (folder) => ({
     parentIdx: index("folders_parent_idx").on(folder.parent),
