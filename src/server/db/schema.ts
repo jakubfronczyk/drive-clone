@@ -1,4 +1,4 @@
-import "server-only";
+// import "server-only";
 
 import { relations, sql } from "drizzle-orm";
 import {
@@ -110,8 +110,8 @@ export const verificationTokens = createTable(
   }),
 );
 
-export const files = createTable(
-  "files",
+export const files_table = createTable(
+  "files_table",
   {
     id: integer("id").notNull().primaryKey(),
     name: varchar("name", { length: 255 }).notNull(),
@@ -124,8 +124,8 @@ export const files = createTable(
   }),
 );
 
-export const folders = createTable(
-  "folders",
+export const folder_table = createTable(
+  "folders_table",
   {
     id: integer("id").notNull().primaryKey(),
     name: varchar("name", { length: 255 }).notNull(),
