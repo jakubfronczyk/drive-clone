@@ -5,21 +5,23 @@ import {
   files_table as filesSchema,
   folder_table as foldersSchema,
 } from "~/server/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, isNull } from "drizzle-orm";
 
 export const QUERIES = {
   getFolders: async function (folderId: number) {
     return await db
       .select()
       .from(foldersSchema)
-      .where(eq(foldersSchema.parent, folderId));
+      .where(eq(foldersSchema.parent, folderId))
+      .orderBy(foldersSchema.id);
   },
 
   getFiles: async function (folderId: number) {
     return await db
       .select()
       .from(filesSchema)
-      .where(eq(filesSchema.parent, folderId));
+      .where(eq(filesSchema.parent, folderId))
+      .orderBy(filesSchema.id);
   },
 
   getAllParentsForFolder: async function (folderId: number) {
@@ -39,5 +41,22 @@ export const QUERIES = {
     }
 
     return parents;
+  },
+
+  getFolderById: async function (folderId: number) {
+    const folder = await db
+      .select()
+      .from(foldersSchema)
+      .where(eq(foldersSchema.id, folderId));
+    return folder[0];
+  },
+
+  // TODO: add user id and owner id
+  getRootFolderForUser: async function () {
+    const folder = await db
+      .select()
+      .from(foldersSchema)
+      .where(isNull(foldersSchema.parent));
+    return folder[0];
   },
 };
