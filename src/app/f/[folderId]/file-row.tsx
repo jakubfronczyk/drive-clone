@@ -7,7 +7,7 @@ export function FileRow(props: { file: typeof files_table.$inferSelect }) {
   return (
     <li
       key={file.id}
-      className="hover:bg-gray-750 border-b border-stone-500 px-6 py-4"
+      className="hover:bg-gray-750 border-b border-stone-500 px-6 py-4 last:border-b-0"
     >
       <div className="grid grid-cols-12 items-center gap-4">
         <div className="col-span-6 flex items-center">
@@ -32,7 +32,7 @@ export function FolderRow(props: { folder: typeof folder_table.$inferSelect }) {
   return (
     <li
       key={folder.id}
-      className="hover:bg-gray-750 border-b border-stone-500 px-6 py-4"
+      className="hover:bg-gray-750 border-b border-stone-500 px-6 py-4 last:border-b-0"
     >
       <div className="grid grid-cols-12 items-center gap-4">
         <div className="col-span-6 flex items-center">
